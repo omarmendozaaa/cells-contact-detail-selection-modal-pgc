@@ -61,23 +61,13 @@ export class CellsContactDetailSelectionModalPgc extends LitElement {
   }
 
   updated(propsChanged) {
-    // if (this._documentNumber && this._documentType) {
-    //   this._isDisabled = false;
-    // } else {
-    //   this._isDisabled = true;
-    // }
-    // console.log(this._documentNumber, '--->', this._documentType, '--->', this._isDisabled)
+    if (this._contactNumber) {
+      this._isDisabled = false;
+    } else {
+      this._isDisabled = true;
+    }
   }
 
-  _contactChange(event) {
-    this._contactNumber = event.target.value;
-    console.info(event.target.value);
-  }
-
-  _contactNumberChange(event) {
-    this._contactNumber = event.target.value;
-    console.info(event.target.value);
-  }
   async init(data) {
     this.reset();
     this.title = data.title ? data.title : this.title;
@@ -109,6 +99,21 @@ export class CellsContactDetailSelectionModalPgc extends LitElement {
     };
   }
 
+  _contactChange(event) {
+    this._contactNumber = event.target.value;
+    console.info(event.target.value);
+  }
+
+  _contactNumberChange(event) {
+    this._contactNumber = event.target.value;
+    console.info(event.target.value);
+  }
+
+  _isOtherNumberChange(){
+    const radiobtn = this.shadowRoot.querySelector('#radioBtn');
+    radiobtn.checked = !this._isOtherNumber;
+    this._isOtherNumber = !this._isOtherNumber;
+  }
   open() {
     const modal = this.shadowRoot.querySelector('#modalContent');
     modal.open();
@@ -158,7 +163,7 @@ export class CellsContactDetailSelectionModalPgc extends LitElement {
           <label>${this.subtitle}</label>
           <div class="form-group">
             <label> ${this.contactLabel}:</label>
-            <bbva-web-form-select class="lg-6" @change=${this._contactChange}>
+            <bbva-web-form-select class="lg-6" @change=${this._contactChange} .disabled=${this._isOtherNumber}>
               ${this.listContacts.map(
                 (contact) => html`
                   <bbva-web-form-option value="${contact.contactNumber}"
@@ -169,9 +174,10 @@ export class CellsContactDetailSelectionModalPgc extends LitElement {
             </bbva-web-form-select>
           </div>
           <div class="form-group">
-            <bbva-web-form-radio-button></bbva-web-form-radio-button>
+            <bbva-web-form-radio-button id="radioBtn" @click=${this._isOtherNumberChange}></bbva-web-form-radio-button>
             <label> ${this.otherLabel}:</label>
             <bbva-web-form-text
+              .disabled=${!this._isOtherNumber}
               class="lg-6"
               @input=${this._contactNumberChange}
             ></bbva-web-form-text>
