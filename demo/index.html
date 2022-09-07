@@ -29,7 +29,19 @@
     <bbva-core-demo-helper>
       <bbva-core-demo-case heading="Basic" description="Default specs">
         <template>
-          <cells-contact-detail-selection-modal-pgc></cells-contact-detail-selection-modal-pgc>
+          <bbva-web-button-default class="btnModal">Open</bbva-web-button-default>
+          <cells-contact-detail-selection-modal-pgc id="demo"></cells-contact-detail-selection-modal-pgc>
+          <script>
+            const btn = document.querySelector('.btnModal');
+            const demo = document.querySelector('#demo')
+            document.addEventListener('WebComponentsReady', async() => {
+              const data = await fetch('./data/data.json').then(response => response.json())
+              demo.init(data)
+            })
+            btn.addEventListener('click', () => {
+              demo.open();
+            });
+          </script>
         </template>
       </bbva-core-demo-case>
     </bbva-core-demo-helper>

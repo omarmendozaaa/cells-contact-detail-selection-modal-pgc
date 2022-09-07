@@ -1,0 +1,24 @@
+{
+  "title": "Llamada a cliente",
+  "subtitle": "Ingresa dato de contacto:",
+  "contactLabel": "Teléfono",
+  "otherLabel": "Otro",
+  "closeable": false,
+  "listContacts": [
+    {
+      "id": 1,
+      "contactNumber": "991991991"
+    },
+    {
+      "id": 2,
+      "contactNumber": "992992992"
+    },    {
+      "id": 3,
+      "contactNumber": "993993993"
+    },    {
+      "id": 4,
+      "contactNumber": "994994994"
+    }
+  ],
+  "buttonLabel": "Llamar"
+}
