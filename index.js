@@ -1,0 +1,1 @@
+export { CellsContactDetailSelectionModalPgc } from './src/CellsContactDetailSelectionModalPgc.js';
